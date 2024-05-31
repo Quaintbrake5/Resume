@@ -1,214 +1,158 @@
-function printpdf() {
-    let content = document.getElementById("resume");
+// alert("loading");
+function addNewLanField() {
+    let newNode = document.createElement("input");
+    newNode.classList.add("form-control");
+    newNode.classList.add("laField");
+    newNode.classList.add("mt-2");
+    newNode.setAttribute("placeholder", "Enter here");
   
-    const allButtons = document.querySelectorAll("#print button");
-    allButtons.forEach(button => {
-        button.classList.add("none");
-    });
-    let allInputCheckboxes = document.querySelectorAll(".input-checkbox");
-    allInputCheckboxes.forEach(input => {
-        input.classList.add("none");
-    })
+    let aqOb = document.getElementById("la");
+    let aqAddButtonOb = document.getElementById("laAddButton");
   
-  allButtons.forEach(button => {
-      button.classList.remove("none");
-  })
-  allInputCheckboxes.forEach(input => {
-      input.classList.remove("none");
-  })
-  
-  const pdfOptions = {
-      margin: 10,
-      filename: 'converted_document.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-  
-    html2pdf(content, {
-        html2canvas: { scale: 1, logging: true, dpi: 500 }
-    }, pdfOptions);
+    aqOb.insertBefore(newNode, aqAddButtonOb);
   }
   
-  function addedu() {
-    const head = document.createElement('div');
-    document.getElementById("education").appendChild(head);
-    head.innerHTML = ('<div class="edublock"><span><input type="checkbox" class="input-checkbox"></span><span class="education-head" contenteditable="true">YOUR DEGREE</span><div ><span contenteditable="true">Institute name</span> - <span contenteditable="true">Passing Year</span></div></div>');
-    saveresume();
-  }
-  function remedu(event) {
-    let val = 0;
-    let empty = true;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
-    }
-    else {
-        console.log(array);
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
-    }
-    saveresume();
+  function addNewEdField() {
+    let newNode = document.createElement("textarea");
+    newNode.classList.add("form-control");
+    newNode.classList.add("edField");
+    newNode.classList.add("mt-2");
+    newNode.setAttribute("rows", 3);
+    newNode.setAttribute("placeholder", "Enter here");
+  
+    let aqOb = document.getElementById("ed");
+    let aqAddButtonOb = document.getElementById("aqAddButton");
+  
+    aqOb.insertBefore(newNode, aqAddButtonOb);
   }
   
   
-  function addskill() {
-    const head = document.createElement('div');
-    document.getElementById("skills").appendChild(head);
-    head.innerHTML = ('<div class="skill"><span><input type="checkbox" class="input-checkbox"></span><span><i class="fas fa-chevron-circle-right"></i></span>&nbsp&nbsp&nbsp<span contenteditable="true">write your skill here</span></div>');
-    saveresume();
+  
+  function addNewTiField() {
+    let x = document.createElement("input");
+    x.classList.add("form-control");
+    x.classList.add("tiField");
+    x.classList.add("mt-2");
+    x.setAttribute("placeholder", "Enter title");
+  
+    let aqOb = document.getElementById("we");
+    let aqAddButtonOb = document.getElementById("weAddButton");
+    aqOb.insertBefore(x, aqAddButtonOb);
   }
   
-  function remskill(event) {
-    let val = 0;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
-    }
-    else {
-        console.log(array);
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
-    }
-    saveresume();
+  function addNewWEField() {
+    // addNewTiField();
+    let newNode = document.createElement("textarea");
+    newNode.classList.add("form-control");
+    newNode.classList.add("weField");
+    newNode.classList.add("mt-2");
+    newNode.setAttribute("rows", 3);
+    newNode.setAttribute("placeholder", "Enter Experience");
+  
+    let weOb = document.getElementById("we");
+    let weAddButtonOb = document.getElementById("weAddButton");
+    weOb.insertBefore(newNode, weAddButtonOb);
   }
   
+  function addNewAQField() {
+    let newNode = document.createElement("input");
+    newNode.classList.add("form-control");
+    newNode.classList.add("skField");
+    newNode.classList.add("mt-2");
+    newNode.setAttribute("placeholder", "Enter here");
   
-  function addLang() {
-    const head = document.createElement('div');
-    document.getElementById("languages").appendChild(head);
-    head.innerHTML = ('<div class="language"><span><input type="checkbox" class="input-checkbox"></span><span contenteditable="true">LANGNAME</span>&nbsp-&nbsp<span contenteditable="true">level u know</span></div>');
-    saveresume();
-  }
-  function remLang(event) {
-    let val = 0;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
-    }
-    else {
-        console.log(array);
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
-    }
-    saveresume();
+    let aqOb = document.getElementById("sk");
+    let aqAddButtonOb = document.getElementById("skAddButton");
+  
+    aqOb.insertBefore(newNode, aqAddButtonOb);
   }
   
+  //generating cv
+  function generateCV() {
+    document.getElementById("nName").innerHTML =
+      document.getElementById("nameField").value;
   
-  function addAch() {
-    const head = document.createElement('div');
-    document.getElementById("achievement").appendChild(head);
-    head.innerHTML = ('<div class="achieve" ><span><input type="checkbox" class="input-checkbox"></span><span contenteditable="true">Write your achievement</span></div>');
-    saveresume();
-  }
-  function remAch(event) {
-    let val = 0;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
-    }
-    else {
-        console.log(array);
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
-    }
-    saveresume();
-  }
+    // job title 
+    document.getElementById("jJob").innerHTML = document.getElementById(
+      "jobFiled"
+    ).value;
   
+    //contact
+    document.getElementById("cContact").innerHTML =
+      document.getElementById("contactField").value;
   
-  function addInt() {
-    const head = document.createElement('div');
-    document.getElementById("interest").appendChild(head);
-    head.innerHTML = ('<div class="achieve" ><span><input type="checkbox" class="input-checkbox"></span><span contenteditable="true">Write interest</span></div>');
-    saveresume();
-  }
-  function remInt(event) {
-    let val = 0;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
-    }
-    else {
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
-    }
-    saveresume();
-  }
+    //gmail
+    document.getElementById("gGmail").innerHTML =
+      document.getElementById("gmailFiled").value;
   
-  let maxNewSection = 1;
-  function addsec() {
-    if (maxNewSection < 2) {
-        const head = document.createElement('div');
-        document.getElementById("newsec").appendChild(head);
-        if (maxNewSection === 0) {
-            head.innerHTML = ('<div><span><input type="checkbox" class="input-checkbox"></span><span class="title" contenteditable="true">NEW SECTION</span><br><br><div contenteditable="true">This is the description part of your new section. Try to stay within limit and write something which has less than 400 characters. The spaces and symbols you use will also be included so use them for an indentation effect.</div></div>');
-        }
-        else {
-            head.innerHTML = ('<div><br><br><span><input type="checkbox" class="input-checkbox"></span><span class="title" contenteditable="true">NEW SECTION</span><br><br><div contenteditable="true">This is the description part of your new section. Try to stay within limit and write something which has less than 400 characters. The spaces and symbols you use will also be included so use them for an indentation effect.</div></div>');
-        }
+    document.getElementById("fFacebook").href =
+      document.getElementById("fbField").value;
   
-        maxNewSection = maxNewSection + 1;
-    }
-    else {
-        alert("Atmost 2 NEW SECTION can be added!")
+    document.getElementById("lLinkedin").href =
+      document.getElementById("linkedField").value;
   
+    // languages
+    let languages = document.getElementsByClassName("laField");
+    let lanF = "";
+    for (let e of languages) {
+      lanF += `<li> <span> ${e.value} </span></li>`;
     }
-    saveresume();
-  }
-  function remsec(event) {
-    let val = 0;
-    const allInputCheckboxes = event.target.parentElement.getElementsByClassName("input-checkbox");
-    const array = Array.from(allInputCheckboxes);
-    if (array.length === 0) {
-        alert("No fields are present to be deleted!")
+    document.getElementById("lan").innerHTML = lanF;
+  
+    //objective (about)
+    document.getElementById("objectiveT").innerHTML = document.getElementById("objectiveField").value;
+    // 
+  
+    // education 
+    let educationF = document.getElementsByClassName("edField");
+    let resEdu = "";
+    for (let e of educationF) {
+      resEdu += `<li> <p> ${e.value} </p></li>`;
     }
-    else {
-        console.log(array);
-        array.forEach(element => {
-            if (element.checked === true) {
-                val = 1;
-                maxNewSection = maxNewSection - 1;
-                element.parentElement.parentElement.remove();
-            }
-        })
-        if (val === 0) alert("Please select the checkboxes to delete the required field!")
+    document.getElementById("edu").innerHTML = resEdu;
+    // title field
+    // let titleFF = document.getElementsByClassName("tiField");
+    // let titF = "";
+    // for (let e of titleFF) {
+    //     titF += `<h3> ${e.value} </h3>`;
+    // }
+    // document.getElementById("titleF").innerHTML = titF;
+    // work experience
+    let wes = document.getElementsByClassName("weField");
+    let str = "";
+    for (let e of wes) {
+      str += `<li class="squar"> <h4> ${e.value} </h4></li>`;
     }
-    saveresume();
+    document.getElementById("weT").innerHTML = str;
+  
+    // professional skills
+    let aqs = document.getElementsByClassName("skField");
+    let str1 = "";
+    for (let e of aqs) {
+      str1 += `<li class="squar"> <h4> ${e.value} </h4></li>`;
+    }
+    if (str1.length) document.getElementById("skills").innerHTML = str1;
+  
+    //code for setting image
+  
+    let file = document.getElementById("imgField").files[0];
+    let reader = new FileReader();
+  
+    reader.readAsDataURL(file);
+  
+    console.log(reader.result);
+  
+    //set the image to template
+  
+    reader.onloadend = function() {
+      document.getElementById("imgTemplate").src = reader.result;
+    };
   }
   
-  function saveresume() {
-    let sec = document.getElementById("print");
-    value1 = sec.innerHTML;
-    let info = document.getElementById("custinfo");
-    info.value = value1;
+  //print cv
+  function printCV() {
+    document.getElementById("cv-form").style.display = "none";
+    document.getElementById("cv-template").style.display = "block";
+    document.getElementById("btnN").style.display = "none";
+    window.print();
   }
